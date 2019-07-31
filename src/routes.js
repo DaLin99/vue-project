@@ -2,6 +2,8 @@ import home from '../src/components/Home/Home.vue'
 import member from '../src/components/Member/Member.vue'
 import shopcart from '../src/components/Shopcart/Shopcart.vue'
 import search from '../src/components/Search/Search.vue'
+import newslist from './components/news/newsList.vue'
+import newsInfo from './components/news/newsInfo.vue'
 import VueRouter from 'vue-router'
 
 var router = new VueRouter({
@@ -18,6 +20,12 @@ var router = new VueRouter({
         }, {
             path: '/search',
             component: search
+        },{
+            path:'/home/newslist',
+            component:newslist
+        },{
+            path:'/home/newsList/:id',
+            component:newsInfo
         }
     ],
     linkActiveClass: 'mui-active'

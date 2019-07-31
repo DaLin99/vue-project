@@ -41,6 +41,7 @@ export default {
 .app-container{
   overflow-x: hidden;
   padding-top:40px;
+  padding-bottom: 50px;
 }
 .v-enter,.v-leave-to{
   opacity: 0;

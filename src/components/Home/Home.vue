@@ -9,12 +9,17 @@
 
  <!--六宫格-->
  <div class="menu-img-row">
-    <img class="menu-img" src="../../img/menu1.png" alt="">
+   <router-link to="/home/newslist">
+        <img class="menu-img" src="../../img/menu1.png" alt="">
+   </router-link>
+ 
     <img class="menu-img" src="../../img/menu2.png" alt="">
     <img class="menu-img" src="../../img/menu3.png" alt="">
  </div>
  <div class="menu-img-row">
-    <p>新闻资讯</p>
+   <router-link to="/home/newslist">
+      <p>新闻资讯</p>
+   </router-link>
     <p>影片分享</p>
     <p>商品分类</p>
  </div>
