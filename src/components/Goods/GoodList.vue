@@ -1,47 +1,56 @@
 <template>
-  <div class="goodsList">
-    <div class="goods-item">
+  <div class="goodsList" >
+    <div class="goods-item" @click="goTogoodInfo(item.id)" v-for="item in goodsList" :key="item.index">
       <div>
-        <img class="goods-item-img" src="../../img/menu1.png" alt />
-        <p class="item-name">华为据大家大家按时的</p>
+        <img class="goods-item-img" :src="item.img_url" alt />
+        <p class="item-name">{{item.title}}</p>
       </div>
       <div class="gray">
         <p>
-          <span class="new-price">￥871</span>
-          <span class="old-price">￥122</span>
+          <span class="new-price">￥{{item.sell_price}}</span>
+          <span class="old-price">￥{{item.market_price}}</span>
         </p>
 
         <div class="hot-much">
-          <span class="hotsell">撒谎的啊</span>
-          <span class="much">sjadhahs</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="goods-item">
-      <div>
-        <img class="goods-item-img" src="../../img/menu1.png" alt />
-        <p class="item-name">华为小米地级234444444443fsdffd市啊大数据大家大家按时的</p>
-      </div>
-      <div class="gray">
-        <p>
-          <span class="new-price">￥871</span>
-          <span class="old-price">￥122</span>
-        </p>
-
-        <div class="hot-much">
-          <span class="hotsell">撒谎的啊</span>
-          <span class="much">sjadhahs</span>
+          <span class="hotsell">热卖中</span>
+          <span class="much">剩余{{item.stock_quantity}}件</span>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
   name: "goodsList",
   data() {
-    return {};
+    return {
+      pageIndex:1,
+      goodsList:[]
+    };
+  },
+  created(){
+   this.getGoodsList()
+  },
+  methods:{
+    getGoodsList(){
+      axios.get("http://www.liulongbin.top:3005/api/getgoods?pageindex="+this.pageIndex)
+      .then(result=>{
+        console.log(result.data)
+        this.goodsList = this.goodsList.concat(result.data.message)
+      }).catch(err=>{
+        console.log(err)
+      })
+    },
+    goTogoodInfo(id){
+      this.$router.push({
+        path:'/home/goodslist/'+id,
+        name:'goodsinfo',
+        params:{
+          id:id
+        }
+      })
+    }
   }
 };
 </script>
@@ -76,7 +85,8 @@ span {
   min-height: 295px;
 }
 .goods-item-img {
-  width: 5rem;
+  width: 100%;
+  height: 100%;
 }
 .new-price {
   color: red;
