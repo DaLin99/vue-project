@@ -1,7 +1,11 @@
 <template>
   <div id="app" class="app-container">
-    <mt-header fixed title="固定在顶部"></mt-header>
-
+    <mt-header fixed title="固定在顶部">
+      <span  v-show="flag" @click="goBack" slot="left">
+    <mt-button icon="back">back</mt-button>
+      </span>
+    </mt-header>
+        
     <!--路由显示内容-->
     <transition>
       <router-view></router-view>
@@ -33,7 +37,32 @@
 <script>
 export default {
   name: "app",
-  components: {}
+  data(){
+    return{
+       flag:false
+    }
+  },
+  created(){
+   this.flag = this.$route.path === '/'?false:true
+  },
+  watch:{
+ '$route.path':function(newval){
+  if(newval ==='/'){
+    this.flag = false
+    console.log( this.flag)
+    console.log(this.$route.path)
+  }else{
+    this.flag = true
+      console.log( this.flag)
+      console.log("this.$route.path:",this.$route.path)
+  }
+ }
+  },
+  methods:{
+    goBack(){
+      this.$router.go(-1)
+    }
+  }
 };
 </script>
 

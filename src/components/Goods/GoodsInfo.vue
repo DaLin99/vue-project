@@ -32,7 +32,9 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> 
+
+{{$store.getters.getAllCount}}
 
     <div class="mui-card">
       <div class="mui-card-header">商品参数</div>
@@ -68,6 +70,7 @@ export default {
   created() {
     this.getLunboTu();
     this.getGoodsInfo();
+    console.log("store：",this.$store.getters.getAllCount)
   },
   components: {
     swiper,
@@ -109,6 +112,13 @@ export default {
     },
     addTocart() {
       this.ballFlag = !this.ballFlag;
+      var goods ={
+        id:this.imgid,
+        price:this.goodsInfo.sell_price,
+        count:this.selectCount,
+        selected:true
+      }
+      this.$store.commit("addToCart",goods)
     },
     beforeEnter(el) {
       el.style.transform = "translate(0, 0)";
