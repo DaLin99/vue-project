@@ -1,5 +1,7 @@
 # vue_mintui
 
+## function1
+
 ## Project setup
 ```
 npm install
